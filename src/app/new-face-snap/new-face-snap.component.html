@@ -20,7 +20,7 @@
             <input type="text" id="location" formControlName="location">
         </div>
         <div class="action-buttons">
-            <button type="submit">Add</button>
+            <button type="submit" [disabled]="snapForm.invalid">Add</button>
         </div>
     </form>
 

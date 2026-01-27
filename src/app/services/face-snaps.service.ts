@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { FaceSnap } from '../models/face-snap.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FaceSnapsService {
+
   faceSnaps: FaceSnap[] = [
     {
       id: 1,
       title: 'Archibald',
-      description: 'Mon meilleur ami depuis tout petit !',
+      description: 'My best friend since childhood!',
       imageUrl: 'https://cdn.pixabay.com/photo/2015/05/31/16/03/teddy-bear-792273_1280.jpg',
       createdDate: new Date(),
       snaps: 47,
@@ -18,45 +20,27 @@ export class FaceSnapsService {
     {
       id: 2,
       title: 'Three Rock Mountain',
-      description: 'Un endroit magnifique pour les randonnées.',
+      description: 'A beautiful place for hiking.',
       imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Three_Rock_Mountain_Southern_Tor.jpg/2880px-Three_Rock_Mountain_Southern_Tor.jpg',
       createdDate: new Date(),
       snaps: 6,
-      location: 'la montagne'
+      location: 'The mountain'
     },
     {
       id: 3,
       title: 'Un bon repas',
-      description: 'Mmmh que c\'est bon !',
+      description: 'Mmm, delicious!',
       imageUrl: 'https://wtop.com/wp-content/uploads/2020/06/HEALTHYFRESH.jpg',
       createdDate: new Date(),
       snaps: 156
     },
     {
       id: 4,
-      title: 'Archibald',
-      description: 'Mon meilleur ami depuis tout petit !',
-      imageUrl: 'https://cdn.pixabay.com/photo/2015/05/31/16/03/teddy-bear-792273_1280.jpg',
+      title: 'Duck',
+      description: 'Tastes better as a confit...',
+      imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnXMgI-33QnVxrqZYy2KX7ztZ81ecLAi1lF6JWH4ZTTESbxNwfDwfEbAQi_kM35jvLuDMS7vIeVnhwKKc1I8r8lbEPdm5eg8Uos378NBXBENpUah4C9PNRzoIXSQ&s=10&ec=121516186',
       createdDate: new Date(),
-      snaps: 89,
-      location: 'Paris'
-    },
-    {
-      id: 5,
-      title: 'Three Rock Mountain',
-      description: 'Un endroit magnifique pour les randonnées.',
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Three_Rock_Mountain_Southern_Tor.jpg/2880px-Three_Rock_Mountain_Southern_Tor.jpg',
-      createdDate: new Date(),
-      snaps: 27,
-      location: 'la montagne'
-    },
-    {
-      id: 6,
-      title: 'Un bon repas',
-      description: 'Mmmh que c\'est bon !',
-      imageUrl: 'https://wtop.com/wp-content/uploads/2020/06/HEALTHYFRESH.jpg',
-      createdDate: new Date(),
-      snaps: 101
+      snaps: 202
     }
   ];
 
@@ -76,5 +60,18 @@ export class FaceSnapsService {
   snapFaceSnapById(faceSnapId: number, snapType: 'snap' | 'unsnap'): void {
     const faceSnap = this.getFaceSnapById(faceSnapId);
     snapType === 'snap' ? faceSnap.snaps++ : faceSnap.snaps--;
+  }
+
+  addNewFaceSnap(snapForm: FormGroup): void {
+    const id: number = this.faceSnaps[this.faceSnaps.length - 1].id + 1;
+
+    const newFaceSnap: FaceSnap = {
+      ...snapForm.value,
+      id: id,
+      snaps: 0,
+      createdDate: new Date()
+    }
+
+    this.faceSnaps.push(newFaceSnap);
   }
 }
