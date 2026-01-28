@@ -7,6 +7,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { httpInterceptorProviders } from './constants/http-interceptor-providers.constants';
 import { FaceSnapListComponent } from './face-snap-list/face-snap-list.component';
 import { FaceSnapComponent } from './face-snap/face-snap.component';
 import { HeaderComponent } from './header/header.component';
@@ -32,7 +33,8 @@ import { SingleFaceSnapComponent } from './single-face-snap/single-face-snap.com
     HttpClientModule
   ],
   providers: [
-    { provide: LOCALE_ID, useValue: 'fr-FR' }
+    { provide: LOCALE_ID, useValue: 'fr-FR' },
+    httpInterceptorProviders
   ],
   bootstrap: [AppComponent]
 })
